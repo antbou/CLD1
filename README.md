@@ -178,6 +178,9 @@ sudo systemctl restart php7.4-fpm
 ```
 ### Database
 ```
+# Connect to mariadb
+sudo mariadb
+
 CREATE DATABASE client1;
 
 GRANT ALL PRIVILEGES ON client1.* TO 'client1'@localhost IDENTIFIED BY 'password';
