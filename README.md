@@ -30,9 +30,9 @@ Realized by `Anthony` and `Sou`.
 | Processors           | 1                                                |
 | Cores per processors | 1                                                |
 | RAM                  | 2048 MB                                          |
-| Network Adapter      | Nat                                              |
+| Network Adapter      | NAT                                              |
 | Virtual disk type    | SCSI                                             |
-| Disk size            | 20GB                                             |
+| Disk size            | 20 GB                                             |
 
 #### Installation of the operating system
 
@@ -41,7 +41,8 @@ Realized by `Anthony` and `Sou`.
 1. You can change the name. You can leave the domain name blank, unless you need to use a specific domain.
 1. Now choose a password for the administrator `root`.
 1. Then select the `name` and `password` of the new user.
-1. Select `Assisted - use an entire disk`, then skip the steps until you get to the configuration step in the package management tool where you should put `no`.
+1. Select `Guided - use an entire disk`, then skip the steps until you get to the question `Write the changes to disks` where you should put `yes`.
+1. For package management tool step, you should put `no`.
 1. For the mirror section, select your country and follow the steps.
 1. When you select `Software Selection`, deselect everything except `Common System Utilities`.
 1. When the installation wizard asks if you want to install `GRUB`, select `Yes`. Then choose `/dev/sda`.
@@ -87,6 +88,8 @@ AllowGroups ssh_users
 systemctl restart sshd
 ```
 
+You can now use ssh to connect from another machine.
+
 ### Nginx
 
 ```
@@ -100,7 +103,7 @@ systemctl enable nginx
 ### PHP
 
 ```
-# Install php-fpm
+# Install php-fpm (latest version which is 7.4)
 apt install php-fpm
 
 # Enable the service at startup
@@ -276,7 +279,7 @@ server {
 
         location ~ \.php$ {
                 try_files $uri =404;
-                fastcgi_pass unix:/var/run/php/php7.4fpm-client1.sock;
+                fastcgi_pass unix:/var/run/php/php7.4-fpm-client1.sock;
                 fastcgi_index index.php;
                 fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
                 include fastcgi_params;
@@ -288,7 +291,7 @@ The above code shows a common configuration for a server block in nginx.
 
 - Web root is /home/client1/www
 - The server name uses the domaine client1.ch
-- fastcgi_pass specifies the handler for the php files. For every site you should use a different unix socket such as /var/run/php/php7.4fpm-client1.sock
+- fastcgi_pass specifies the handler for the php files. For every site you should use a different unix socket such as /var/run/php/php7.4-fpm-client1.sock
 
 To enable the above site you have to create a symlink to it in the directory /etc/nginx/sites-enabled/
 
