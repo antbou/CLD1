@@ -144,7 +144,7 @@ Each site has its own PHP-FPM Pool. Scripts are run by the www-data user, the ho
 
 If you have covered the steps above, you should already have one functional website on your machine. Unless you have specified a custom fqdn for it, you should be able to access it under the IP of the your machine remotely.
 
-Now we’ll create a second site (client1.ch) with its own php-fpm pool and Linux user.
+Now we’ll create a new site (client1.ch) with its own php-fpm pool and Linux user.
 
 Note that `client1` can be replaced by any name.
 
@@ -263,7 +263,6 @@ Once we have configured the php-fpm pool for our site we’ll configure the serv
 ```
 # Create the Virtual Host
 nano /etc/nginx/sites-available/client1
-
 ```
 
 Copy the following :
@@ -337,7 +336,7 @@ It is possible to transfer files to the website with SCP as follows .
 scp -pr ./<FOLDER>/* <USERNAME>@<HOSTNAME>:~/www
 ```
 
-## Hosts file
+## Hosts file (client side)
 
 You have to change the host file because there is no DNS.
 
